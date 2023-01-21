@@ -1,0 +1,16 @@
+version: 0.0
+os: linux
+files:
+  - source: /vendor/
+    destination: /home/ec2-user/serverpod/upload/vendor/
+  - source: /mealplanner_backend_server/
+    destination: /home/ec2-user/serverpod/upload/mealplanner_backend_server/
+hooks:
+  BeforeInstall:
+    - location: mealplanner_backend_server/aws/scripts/install_dependencies
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: mealplanner_backend_server/aws/scripts/start_server
+      timeout: 300
+      runas: root
